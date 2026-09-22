@@ -1,0 +1,204 @@
+---
+// ============================================================
+// PROMAQ MÁQUINAS - Layout base
+// Compartido por todas las páginas: <head> SEO + Schema
+// LocalBusiness + Header + slot de contenido + Footer + WhatsApp.
+// Los datos de contacto se editan UNA sola vez acá.
+// ============================================================
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFlotante from '../components/WhatsAppFlotante.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  schemaFaq?: object;
+}
+
+const { title, description, keywords, schemaFaq } = Astro.props;
+
+const urlCanonical = new URL(Astro.url.pathname, Astro.site).href;
+const urlImagen = 'https://www.promaqmaquinas.com.ar/assets/images/logo.png';
+
+// Schema compartido: AutoRepair / LocalBusiness (datos del negocio)
+const schemaNegocio = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoRepair',
+  '@id': 'https://www.promaqmaquinas.com.ar/#negocio',
+  name: 'PROMAQ MÁQUINAS',
+  alternateName: 'Promaq Maquinas',
+  description:
+    'Servicio integral para autoelevadores y mantenimiento de maquinaria pesada en Buenos Aires: service preventivo y correctivo en planta, venta y fabricación de filtros industriales, venta de autoelevadores nuevos y reacondicionados, y alquiler de maquinaria.',
+  url: 'https://www.promaqmaquinas.com.ar/',
+  image: urlImagen,
+  telephone: '+5491132077351',
+  email: 'pro.maq@yahoo.com.ar',
+  priceRange: '$$',
+  currenciesAccepted: 'ARS',
+  paymentAccepted: 'Efectivo, Transferencia bancaria',
+  slogan: 'Soporte integral para autoelevadores y maquinaria pesada',
+  founder: {
+    '@type': 'Person',
+    name: 'Emmanuel Moriones',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'A COMPLETAR',
+    addressLocality: 'Buenos Aires',
+    addressRegion: 'Buenos Aires',
+    addressCountry: 'AR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -34.6037,
+    longitude: -58.3816,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '08:00',
+      closes: '12:00',
+    },
+  ],
+  areaServed: [
+    { '@type': 'City', name: 'Ciudad Autónoma de Buenos Aires' },
+    { '@type': 'AdministrativeArea', name: 'Zona Norte del Gran Buenos Aires' },
+    { '@type': 'AdministrativeArea', name: 'Zona Oeste del Gran Buenos Aires' },
+    { '@type': 'AdministrativeArea', name: 'Zona Sur del Gran Buenos Aires' },
+    { '@type': 'AdministrativeArea', name: 'Provincia de Buenos Aires' },
+    { '@type': 'AdministrativeArea', name: 'Entre Ríos' },
+    { '@type': 'Country', name: 'Argentina' },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios troncales de PROMAQ MÁQUINAS',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Service y reparación integral de autoelevadores y maquinaria pesada',
+          url: 'https://www.promaqmaquinas.com.ar/reparacion-autoelevadores/',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Venta de filtros industriales nacionales e importados',
+          url: 'https://www.promaqmaquinas.com.ar/venta-de-filtros/',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Fabricación de filtros especiales sobre muestra, plano o medidas específicas',
+          url: 'https://www.promaqmaquinas.com.ar/fabricacion-filtros-especiales/',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Venta de autoelevadores nuevos y reacondicionados con garantía',
+          url: 'https://www.promaqmaquinas.com.ar/venta-de-autoelevadores/',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Alquiler de maquinaria y autoelevadores con mantenimiento incluido',
+          url: 'https://www.promaqmaquinas.com.ar/alquiler-de-maquinaria/',
+        },
+      },
+    ],
+  },
+};
+---
+
+<!--
+  =================================================================
+  TODO (completar cuando se tengan los datos definitivos):
+    1. streetAddress y coordinates del Schema → dirección real.
+    2. openingHoursSpecification → confirmar horarios
+       (provisorio: L-V 8:00 a 18:00 / Sáb 8:00 a 12:00).
+    3. CUIT y dirección física en el Footer.
+    4. public/assets/images/logo.png → subir el logo.
+  =================================================================
+-->
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- ============ SEO: Meta tags ============ -->
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  {keywords && <meta name="keywords" content={keywords}>}
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="PROMAQ MÁQUINAS - Emmanuel Moriones">
+  <link rel="canonical" href={urlCanonical}>
+
+  <!-- ============ Open Graph ============ -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="PROMAQ MÁQUINAS">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={urlCanonical}>
+  <meta property="og:image" content={urlImagen}>
+
+  <!-- ============ Twitter Cards ============ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={urlImagen}>
+
+  <!-- ============ Favicon ============ -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f172a'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='40' font-weight='bold' fill='%23f97316' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+  <!-- ============ Tipografías ============ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ============ Schema JSON-LD: AutoRepair / LocalBusiness ============ -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaNegocio)}></script>
+
+  <!-- ============ Schema JSON-LD: FAQPage (proporcionada por cada página) ============ -->
+  {schemaFaq && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaFaq)}></script>
+  )}
+</head>
+
+<body class="bg-slate-900 text-zinc-300 font-sans antialiased">
+
+  <!-- Skip link de accesibilidad -->
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-orange-500 focus:px-4 focus:py-2 focus:font-semibold focus:text-slate-900">
+    Saltar al contenido principal
+  </a>
+
+  <Header />
+
+  <main id="contenido">
+    <slot />
+  </main>
+
+  <Footer />
+
+  <WhatsAppFlotante />
+</body>
+</html>

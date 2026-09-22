@@ -10,3 +10,8 @@ node_modules/
 # Archivos internos del proyecto (no forman parte del sitio)
 AGENTS.md
 keywords.md
+
+# Build de Astro
+dist/
+.astro/
+.pnpm-store/

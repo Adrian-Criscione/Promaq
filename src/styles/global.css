@@ -1,0 +1,85 @@
+/* ============================================================
+   PROMAQ MÁQUINAS - Estilos globales (Tailwind CSS v4)
+   Regla del proyecto: mínimo JavaScript, máximo CSS nativo.
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* --- Paleta de marca y tipografías (Tailwind v4: configuración en CSS) --- */
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Montserrat", system-ui, sans-serif;
+
+  --color-grafito: #0f172a;
+  --color-tinta: #18181b;
+  --color-superficie: #27272a;
+  --color-borde: #3f3f46;
+  --color-naranja: #f97316;
+  --color-naranja-fuerte: #ea580c;
+  --color-amarillo: #facc15;
+  --color-amarillo-fuerte: #eab308;
+}
+
+/* --- Scroll suave con respeto por usuarios con movimiento reducido --- */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* --- Fondo rejilla industrial del Hero (estética técnica) --- */
+.fondo-rejilla {
+  background-image:
+    linear-gradient(rgba(63, 63, 70, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 63, 70, 0.35) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* --- Degradado de fusión del Hero hacia el fondo grafito --- */
+.degradado-hero {
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+/* --- Acordeón FAQ nativo (<details>/<summary>): marcador propio --- */
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: "+";
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #f97316;
+  transition: transform 0.2s ease;
+}
+
+details[open] summary::after {
+  content: "\2013"; /* menos */
+  transform: rotate(180deg);
+}
+
+/* --- Foco visible y accesible en todo el sitio --- */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #facc15;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- Selección de texto con la paleta de marca --- */
+::selection {
+  background-color: #f97316;
+  color: #0f172a;
+}

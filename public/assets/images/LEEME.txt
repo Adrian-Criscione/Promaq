@@ -1,0 +1,5 @@
+Colocá aquí el archivo logo.png
+
+- Ruta esperada: public/assets/images/logo.png
+- Se usa en: Header (logo visible) y og:image/twitter:image (SEO social).
+- Tamaño sugerido: mínimo 512x512 px, fondo compatible con modo oscuro (#0f172a).

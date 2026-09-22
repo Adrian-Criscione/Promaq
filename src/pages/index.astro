@@ -1,0 +1,276 @@
+---
+// ============================================================
+// PROMAQ MÁQUINAS - Home
+// Keywords (keywords.md §1 Home): servicio integral para
+// autoelevadores, mantenimiento de maquinaria pesada buenos aires,
+// promaq maquinas, repuestos, soluciones logísticas, mecánica industrial.
+// ============================================================
+import Layout from '../layouts/LayoutBase.astro';
+import TarjetaServicio from '../components/TarjetaServicio.astro';
+import PreguntaFrecuente from '../components/PreguntaFrecuente.astro';
+
+const titulo =
+  'PROMAQ MÁQUINAS | Service de Autoelevadores en Buenos Aires';
+const descripcion =
+  'Servicio integral de autoelevadores y mantenimiento de maquinaria pesada en Buenos Aires y Entre Ríos. Service en planta, filtros y alquiler. Cotizá hoy →';
+const keywords =
+  'servicio integral para autoelevadores, mantenimiento de maquinaria pesada buenos aires, promaq maquinas, repuestos para autoelevadores, soluciones para autoelevadores logísticos, mecánica de maquinaria industrial';
+
+// Los íconos son el contenido SVG de cada tarjeta (paths)
+const servicios = [
+  {
+    href: '/reparacion-autoelevadores/',
+    titulo: 'Service y reparación integral de autoelevadores',
+    descripcion:
+      'Mantenimiento preventivo y correctivo de autoelevadores y maquinaria pesada: frenos, transmisión, sistema hidráulico, motores combustión y eléctricos. En planta o en taller.',
+    icono:
+      '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    ancho: 'lg:col-span-3',
+  },
+  {
+    href: '/venta-de-filtros/',
+    titulo: 'Venta de filtros industriales',
+    descripcion:
+      'Filtros de aire, aceite, combustible e hidráulicos, nacionales e importados, para autoelevadores y maquinaria pesada. Consultá stock y precios por volumen.',
+    icono: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+    ancho: 'lg:col-span-3',
+  },
+  {
+    href: '/fabricacion-filtros-especiales/',
+    titulo: 'Fabricación de filtros especiales',
+    descripcion:
+      'Filtros a medida sobre muestra, plano o medidas específicas para maquinaria fuera de estándar: elementos, mallas y cartuchos filtrantes.',
+    icono:
+      '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+    ancho: 'md:col-span-2 lg:col-span-2',
+  },
+  {
+    href: '/venta-de-autoelevadores/',
+    titulo: 'Venta de autoelevadores',
+    descripcion:
+      'Autoelevadores nuevos y usados seleccionados, reacondicionados con garantía. Diésel, nafta, GLP y eléctricos. Cotización para empresas.',
+    icono:
+      '<rect x="3" y="6" width="7" height="10" rx="1"/><line x1="13" y1="3" x2="13" y2="16"/><line x1="13" y1="16" x2="19" y2="16"/><circle cx="6" cy="18.5" r="2"/><circle cx="16" cy="18.5" r="2"/>',
+    ancho: 'md:col-span-2 lg:col-span-2',
+  },
+  {
+    href: '/alquiler-de-maquinaria/',
+    titulo: 'Alquiler de maquinaria y autoelevadores',
+    descripcion:
+      'Renta por día, mes o largo plazo con mantenimiento incluido. Ideal para depósitos logísticos, obras y descarga de camiones.',
+    icono:
+      '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+    ancho: 'md:col-span-2 lg:col-span-2',
+  },
+];
+
+// FAQ: misma fuente para el acordeón visible y el schema FAQPage
+const preguntasFrecuentes = [
+  {
+    pregunta: '¿El service de autoelevadores lo hacen en planta?',
+    respuesta:
+      'Sí. Realizamos mantenimiento preventivo y correctivo en tu planta o depósito (priorizando las máquinas detenidas para minimizar tiempos de parada) y también atendemos en nuestro taller para trabajos de mayor envergadura.',
+  },
+  {
+    pregunta: '¿A qué zonas llegan? ¿Trabajan en Entre Ríos?',
+    respuesta:
+      'Atendemos en Ciudad Autónoma de Buenos Aires, Zona Norte, Zona Oeste y Zona Sur del GBA, resto de la provincia de Buenos Aires y provincia de Entre Ríos, con foco en industrias, logística y depósitos.',
+  },
+  {
+    pregunta: '¿Fabrican filtros especiales si no consigo el repuesto?',
+    respuesta:
+      'Sí. Fabricamos filtros a medida sobre muestra, plano o medidas específicas: filtros de aire, aceite, combustible e hidráulicos para maquinaria fuera de estándar.',
+  },
+  {
+    pregunta: '¿Alquilan autoelevadores y maquinaria?',
+    respuesta:
+      'Sí. Alquilamos autoelevadores y maquinaria en modalidad diaria, mensual o a largo plazo, con mantenimiento incluido, ideales para depósitos logísticos y descarga de camiones.',
+  },
+  {
+    pregunta: '¿Venden autoelevadores reacondicionados con garantía?',
+    respuesta:
+      'Sí. Trabajamos con autoelevadores nuevos y usados seleccionados, reacondicionados con garantía, en versiones diésel, nafta, GLP y eléctricas. Hacemos cotización para empresas.',
+  },
+];
+
+// Schema FAQPage generado desde la misma fuente (garantiza el espejo 1:1)
+const schemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: preguntasFrecuentes.map((item) => ({
+    '@type': 'Question',
+    name: item.pregunta,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.respuesta,
+    },
+  })),
+};
+---
+
+<Layout title={titulo} description={descripcion} keywords={keywords} schemaFaq={schemaFaq}>
+
+  <!-- ============ Hero Section ============ -->
+  <section id="inicio" class="relative overflow-hidden border-b border-zinc-800 bg-slate-900 scroll-mt-24">
+    <!-- Fondo: rejilla industrial + resplandor naranja -->
+    <div class="fondo-rejilla degradado-hero absolute inset-0 opacity-40" aria-hidden="true"></div>
+    <div class="absolute -top-32 right-0 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-yellow-500/10 blur-3xl" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
+      <div class="max-w-4xl">
+
+        <!-- Badge de respuesta rápida -->
+        <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-yellow-400">
+          <span class="relative flex h-2 w-2" aria-hidden="true">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-yellow-400"></span>
+          </span>
+          Respuesta rápida · Atendemos Buenos Aires y Entre Ríos
+        </p>
+
+        <!-- H1 único y optimizado (keyword primaria de keywords.md) -->
+        <h1 class="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+          Servicio integral para <span class="text-orange-500">autoelevadores</span> y maquinaria pesada en Buenos Aires
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+          Mantenimiento de maquinaria pesada, repuestos, venta y alquiler de autoelevadores para la industria, la logística y los depósitos. Service preventivo y correctivo <strong class="font-semibold text-zinc-200">en planta o en taller</strong>, con respuesta ágil para minimizar tus tiempos de parada.
+        </p>
+
+        <!-- CTAs de acción inmediata -->
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a href="https://wa.me/5491132077351?text=Hola%20Emmanuel%2C%20vengo%20del%20sitio%20web%20y%20quiero%20solicitar%20un%20presupuesto%20de%20servicio%20integral%20para%20autoelevadores." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-8 py-4 text-base font-bold text-slate-900 shadow-xl shadow-orange-500/25 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Cotizar por WhatsApp
+          </a>
+          <a href="#servicios" class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-600 bg-zinc-800/60 px-8 py-4 text-base font-semibold text-zinc-100 transition hover:-translate-y-0.5 hover:border-yellow-500 hover:text-yellow-400">
+            Ver servicios
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Bloque de confianza / ventajas competitivas ============ -->
+  <section id="ventajas" class="border-b border-zinc-800 bg-slate-950 py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">¿Por qué confían en PROMAQ MÁQUINAS?</h2>
+      <p class="mt-2 max-w-2xl text-zinc-400">Soporte técnico real para que tu operación no se detenga.</p>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">+10 años de trayectoria</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Más de diez años manteniendo la maquinaria de la industria porteña.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Atención en planta</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Vamos a tu planta o depósito en CABA, GBA y Entre Ríos; también recibimos en taller.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Repuestos y filtros a medida</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Filtros nacionales e importados en stock y fabricación sobre muestra o plano.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Rapidez que reduce paradas</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Diagnóstico ágil y service prioritario para minimizar tiempos de inactividad.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Servicios Troncales (Grid de 5 cards) ============ -->
+  <section id="servicios" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Servicios troncales</p>
+      <p class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        Cinco soluciones para mantener, mover y hacer crecer tu operación
+      </p>
+      <p class="mt-4 max-w-2xl text-zinc-400">
+        Mecánica de maquinaria industrial, repuestos para autoelevadores y soluciones para autoelevadores logísticos, con presupuesto sin compromiso.
+      </p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-6">
+        {servicios.map((servicio) => (
+          <TarjetaServicio
+            href={servicio.href}
+            titulo={servicio.titulo}
+            descripcion={servicio.descripcion}
+            icono={servicio.icono}
+            ancho={servicio.ancho}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Banner de urgencia / Service en planta ============ -->
+  <section id="service-urgente" class="border-b border-zinc-800 bg-slate-950 py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="relative overflow-hidden rounded-3xl border-l-4 border-orange-500 bg-zinc-800/80 p-8 shadow-2xl shadow-black/40 sm:p-12">
+        <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-yellow-500/10 blur-3xl" aria-hidden="true"></div>
+
+        <div class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div class="max-w-2xl">
+            <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-orange-500/40 bg-orange-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-orange-400">
+              Service urgente en planta
+            </p>
+            <h2 class="font-display text-2xl font-extrabold leading-snug text-white sm:text-3xl">
+              ¿La máquina se detuvo? Minimizamos tus tiempos de parada
+            </h2>
+            <p class="mt-4 leading-relaxed text-zinc-400">
+              Vamos a tu planta con técnicos y repuestos para diagnosticar y reparar en la mayor cantidad de casos en la misma visita. Atendemos industrias, logística y depósitos en Buenos Aires, GBA y Entre Ríos.
+            </p>
+          </div>
+
+          <div class="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
+            <a href="https://wa.me/5491132077351?text=Hola%20Emmanuel%2C%20tengo%20una%20m%C3%A1quina%20detenida%20y%20necesito%20un%20service%20urgente%20en%20planta." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-7 py-4 text-base font-bold text-slate-900 shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 hover:text-white">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pedir service urgente
+            </a>
+            <a href="tel:+5491132077351" class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-600 px-7 py-4 text-base font-semibold text-zinc-100 transition hover:border-yellow-500 hover:text-yellow-400">
+              Llamar ahora
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Preguntas Frecuentes (FAQ / AEO) ============ -->
+  <section id="preguntas-frecuentes" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Preguntas frecuentes</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">Respuestas directas antes de pedir un presupuesto</h2>
+      <p class="mt-4 text-zinc-400">Las dudas más habituales de industrias, logística y depósitos que trabajan con PROMAQ MÁQUINAS.</p>
+
+      <!-- Acordeón con <details>/<summary> nativos: accesible y sin JavaScript -->
+      <div class="mt-10 space-y-4">
+        {preguntasFrecuentes.map((item) => (
+          <PreguntaFrecuente pregunta={item.pregunta} respuesta={item.respuesta} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

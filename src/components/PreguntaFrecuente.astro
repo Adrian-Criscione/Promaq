@@ -1,0 +1,21 @@
+---
+// ============================================================
+// Pregunta frecuente reutilizable: acordeón nativo <details>
+// sin JavaScript (accesible por teclado y para lectores de pantalla).
+// ============================================================
+interface Props {
+  pregunta: string;
+  respuesta: string;
+}
+
+const { pregunta, respuesta } = Astro.props;
+---
+
+<details class="group rounded-2xl border border-zinc-700 bg-zinc-800/60 open:border-orange-500/60 transition">
+  <summary class="flex items-start justify-between gap-4 p-6 font-display font-bold text-white">
+    <h3>{pregunta}</h3>
+  </summary>
+  <div class="border-t border-zinc-700 px-6 pb-6 pt-4 leading-relaxed text-zinc-400">
+    {respuesta}
+  </div>
+</details>

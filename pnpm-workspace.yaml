@@ -1,0 +1,3 @@
+# Configuración de pnpm (pnpm ≥ 12: los settings viven acá, no en package.json)
+allowBuilds:
+  esbuild: true
