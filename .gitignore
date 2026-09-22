@@ -1,0 +1,12 @@
+# Despliegue / dependencias / entorno
+.vercel
+node_modules/
+.env
+
+# Sistema
+.DS_Store
+*:Zone.Identifier
+
+# Archivos internos del proyecto (no forman parte del sitio)
+AGENTS.md
+keywords.md
