@@ -1,0 +1,449 @@
+---
+// ============================================================
+// PROMAQ MÁQUINAS - Fabricación de filtros especiales
+// Ruta: /fabricacion-filtros-especiales/
+// Keywords (keywords.md §4): fabricacion de filtros especiales,
+// filtros a medida para industrias, fabrica de filtros industriales
+// buenos aires, desarrollo de filtros sobre muestra, filtros
+// especiales para maquinaria fuera de estándar, mallas y
+// cartuchos filtrantes a medida.
+// ============================================================
+import Layout from '../layouts/LayoutBase.astro';
+import TarjetaServicio from '../components/TarjetaServicio.astro';
+import PreguntaFrecuente from '../components/PreguntaFrecuente.astro';
+
+const titulo = 'Fabricación de Filtros Especiales a Medida | PROMAQ';
+const descripcion =
+  'Fabricamos filtros especiales a medida sobre plano, muestra o medidas: cartuchos filtrantes y mallas para maquinaria fuera de estándar en Buenos Aires →';
+const keywords =
+  'fabricacion de filtros especiales, filtros a medida para industrias, fabrica de filtros industriales buenos aires, desarrollo de filtros sobre muestra, filtros especiales para maquinaria fuera de estándar, mallas y cartuchos filtrantes a medida';
+
+const urlPagina = 'https://www.promaqmaquinas.com.ar/fabricacion-filtros-especiales/';
+const urlWhatsapp =
+  'https://wa.me/5491132077351?text=Hola%20Emmanuel%2C%20quiero%20consultar%20por%20la%20fabricaci%C3%B3n%20de%20un%20filtro%20a%20medida%2Fespecial';
+
+// Zonas de cobertura (mismo alcance que el Schema del negocio)
+const zonasCobertura = [
+  { '@type': 'City', name: 'Ciudad Autónoma de Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Zona Norte del Gran Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Zona Oeste del Gran Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Zona Sur del Gran Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Provincia de Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Entre Ríos' },
+  { '@type': 'Country', name: 'Argentina' },
+];
+
+// Qué fabricamos (H2 de sección → H3 por tarjeta)
+const queFabricamos = [
+  {
+    titulo: 'Cartuchos filtrantes a medida',
+    descripcion:
+      'Cartuchos de filtro de distintos diámetros, alturas y grados de filtración, con núcleos reforzados y juntas según la aplicación.',
+    icono:
+      '<rect x="8" y="2" width="8" height="20" rx="2"/><line x1="4" y1="6" x2="8" y2="6"/><line x1="4" y1="12" x2="8" y2="12"/><line x1="4" y1="18" x2="8" y2="18"/><line x1="16" y1="6" x2="20" y2="6"/><line x1="16" y1="12" x2="20" y2="12"/><line x1="16" y1="18" x2="20" y2="18"/>',
+  },
+  {
+    titulo: 'Mallas y elementos de filtración',
+    descripcion:
+      'Mallas metálicas y textiles, plisados y elementos planos, cortados y terminados según muestra, plano o medidas específicas.',
+    icono:
+      '<rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>',
+  },
+  {
+    titulo: 'Filtros fuera de estándar',
+    descripcion:
+      'Filtros de aire, aceite, combustible e hidráulicos que no se consiguen en el mercado: equipos importados, líneas antiguas o maquinaria sin representación.',
+    icono:
+      '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  },
+  {
+    titulo: 'Desarrollo sobre muestra o plano',
+    descripcion:
+      'Tomamos la muestra, el plano o las medidas como base de fabricación y replicamos el elemento con materiales acordes al fluido y el ambiente de trabajo.',
+    icono:
+      '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>',
+  },
+];
+
+// Proceso paso a paso (fuente única: grilla visible + contenido)
+const procesoFabricacion = [
+  {
+    titulo: 'Nos pasás la muestra, el plano o las medidas',
+    descripcion:
+      'Traés el filtro original (aunque esté gastado), el plano técnico o las medidas: diámetro, altura y tipo de conexión. Fotos y videos también sirven para empezar.',
+  },
+  {
+    titulo: 'Definimos especificación y materiales',
+    descripcion:
+      'Elegimos el medio filtrante, la malla o el plisado, el núcleo y las juntas según el fluido (aire, aceite, gasoil o hidráulico), la presión y el ambiente de trabajo.',
+  },
+  {
+    titulo: 'Desarrollo, muestra y aprobación',
+    descripcion:
+      'Fabricamos la primera pieza, la verificamos contra la muestra original o el plano y te la presentamos para aprobación antes de producir el lote.',
+  },
+  {
+    titulo: 'Producción y entrega',
+    descripcion:
+      'Producimos la cantidad que necesites y coordinamos entrega en planta o retiro dentro de nuestra zona de cobertura, con reposición programada si lo requerís.',
+  },
+];
+
+// FAQ: misma fuente para el acordeón visible y el schema FAQPage
+const preguntasFrecuentes = [
+  {
+    pregunta: '¿Pueden mejorar el filtro original al fabricarlo?',
+    respuesta:
+      'Sí. Al desarrollar la réplica evaluamos el medio filtrante y podemos optimizar la filtración o la vida útil dentro de las medidas del equipo. La mejora se define con vos y se aprueba sobre la muestra antes de producir.',
+  },
+  {
+    pregunta: '¿Qué tipo de elementos especiales fabrican?',
+    respuesta:
+      'Cartuchos filtrantes a medida, mallas y elementos de filtración, y filtros de aire, aceite, combustible e hidráulicos fuera de estándar para maquinaria sin repuesto en el mercado.',
+  },
+  {
+    pregunta: '¿Puedo llevar solo el filtro gastado como referencia?',
+    respuesta:
+      'Sí. Una muestra gastada es el punto de partida más habitual: la medimos, evaluamos el medio filtrante y definimos la mejora técnica antes de producir.',
+  },
+  {
+    pregunta: '¿Cuánto demora la fabricación de un filtro especial?',
+    respuesta:
+      'Depende de la complejidad del desarrollo y del lote. Al confirmar la especificación te informamos el plazo de producción y las condiciones de reposición.',
+  },
+  {
+    pregunta: '¿Para qué maquinaria sirve este servicio?',
+    respuesta:
+      'Para maquinaria fuera de estándar: equipos importados sin repuesto oficial, líneas antiguas, industrias con condiciones de trabajo exigentes y cualquier equipo cuyo filtro no se consigue en el mercado.',
+  },
+  {
+    pregunta: '¿Cómo pido un presupuesto de filtro a medida?',
+    respuesta:
+      'Por WhatsApp al +54 9 11 3207-7351 con fotos, plano o medidas, o desde el formulario de contacto. Evaluamos el desarrollo y enviamos el presupuesto sin compromiso.',
+  },
+];
+
+// Schema FAQPage generado desde la misma fuente (garantiza el espejo 1:1)
+const schemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: preguntasFrecuentes.map((item) => ({
+    '@type': 'Question',
+    name: item.pregunta,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.respuesta,
+    },
+  })),
+};
+
+// Schema adicional: Service + BreadcrumbList
+const schemaAdicional = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${urlPagina}#servicio`,
+      name: 'Fabricación de filtros especiales a medida',
+      serviceType: 'Fabricación de filtros industriales a medida sobre muestra, plano o medidas específicas',
+      description:
+        'Fábrica de filtros industriales en Buenos Aires: desarrollo de filtros sobre muestra, cartuchos filtrantes a medida, mallas y filtros especiales para maquinaria fuera de estándar, para industrias de todo el país.',
+      url: urlPagina,
+      provider: { '@id': 'https://www.promaqmaquinas.com.ar/#negocio' },
+      areaServed: zonasCobertura,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Inicio',
+          item: 'https://www.promaqmaquinas.com.ar/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Fabricación de filtros especiales',
+          item: urlPagina,
+        },
+      ],
+    },
+  ],
+};
+
+// Otros servicios (misma data que la home)
+const otrosServicios = [
+  {
+    href: '/reparacion-autoelevadores/',
+    titulo: 'Service y reparación de autoelevadores',
+    descripcion:
+      'Mantenimiento preventivo y correctivo en planta o taller: frenos, transmisión, hidráulica y mástiles.',
+    icono:
+      '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  },
+  {
+    href: '/venta-de-filtros/',
+    titulo: 'Venta de filtros industriales',
+    descripcion:
+      'Filtros de aire, aceite, combustible e hidráulicos, nacionales e importados, para autoelevadores y maquinaria.',
+    icono: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  },
+  {
+    href: '/venta-de-autoelevadores/',
+    titulo: 'Venta de autoelevadores',
+    descripcion:
+      'Autoelevadores nuevos y usados seleccionados, reacondicionados con garantía. Diésel, nafta, GLP y eléctricos.',
+    icono:
+      '<rect x="3" y="6" width="7" height="10" rx="1"/><line x1="13" y1="3" x2="13" y2="16"/><line x1="13" y1="16" x2="19" y2="16"/><circle cx="6" cy="18.5" r="2"/><circle cx="16" cy="18.5" r="2"/>',
+  },
+  {
+    href: '/alquiler-de-maquinaria/',
+    titulo: 'Alquiler de maquinaria y autoelevadores',
+    descripcion:
+      'Renta por día, mes o largo plazo con mantenimiento incluido. Ideal para depósitos logísticos, obras y descarga de camiones.',
+    icono:
+      '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  },
+];
+---
+
+<Layout title={titulo} description={descripcion} keywords={keywords} schemaFaq={schemaFaq} schemaAdicional={schemaAdicional}>
+
+  <!-- ============ Hero Section ============ -->
+  <section id="inicio" class="relative overflow-hidden border-b border-zinc-800 bg-slate-900 scroll-mt-24">
+    <!-- Fondo: rejilla industrial + resplandor naranja -->
+    <div class="fondo-rejilla degradado-hero absolute inset-0 opacity-40" aria-hidden="true"></div>
+    <div class="absolute -top-32 right-0 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-yellow-500/10 blur-3xl" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+      <div class="max-w-4xl">
+
+        <!-- Miga de pan visible (espejo del BreadcrumbList del schema) -->
+        <nav aria-label="Miga de pan" class="mb-6 text-sm">
+          <ol class="flex flex-wrap items-center gap-2 text-zinc-500">
+            <li><a href="/" class="transition hover:text-orange-400">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li class="text-zinc-300" aria-current="page">Fabricación de filtros especiales</li>
+          </ol>
+        </nav>
+
+        <!-- Badge -->
+        <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-yellow-400">
+          <span class="relative flex h-2 w-2" aria-hidden="true">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-yellow-400"></span>
+          </span>
+          Sobre muestra, plano o medidas · Fábrica en Buenos Aires
+        </p>
+
+        <!-- H1 único y optimizado (keyword primaria de keywords.md §4) -->
+        <h1 class="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+          Fabricación de <span class="text-orange-500">filtros especiales</span> y a medida
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+          Fábrica de filtros industriales en Buenos Aires para industrias y maquinaria fuera de estándar:
+          <strong class="font-semibold text-zinc-200">cartuchos filtrantes, mallas y elementos a medida</strong>
+          desarrollados sobre muestra, plano o medidas específicas, con aprobación de muestra antes de producir.
+        </p>
+
+        <!-- CTAs de acción inmediata -->
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a href={urlWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-8 py-4 text-base font-bold text-slate-900 shadow-xl shadow-orange-500/25 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Cotizar filtro a medida
+          </a>
+          <a href="#proceso" class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-600 bg-zinc-800/60 px-8 py-4 text-base font-semibold text-zinc-100 transition hover:-translate-y-0.5 hover:border-yellow-500 hover:text-yellow-400">
+            Ver el proceso paso a paso
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Bloque de confianza ============ -->
+  <section id="ventajas" class="border-b border-zinc-800 bg-slate-950 py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">¿Por qué fabricar el filtro con PROMAQ MÁQUINAS?</h2>
+      <p class="mt-2 max-w-2xl text-zinc-400">Cuando el repuesto no existe, hay que saber desarrollarlo.</p>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Reposición idéntica a la aprobada</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Guardamos la especificación de cada desarrollo: la reposición sale igual a la muestra que aprobaste, sin rediseños.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Materiales según el fluido</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Medio filtrante, malla, núcleo y juntas elegidos para aire, aceite, gasoil o circuito hidráulico.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Aprobación de muestra</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Verificamos la primera pieza contra la muestra original antes de producir el lote.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Fábrica en Buenos Aires</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Fabricación local con entrega en planta en CABA, GBA y Entre Ríos.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Qué fabricamos ============ -->
+  <section id="que-fabricamos" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Filtros a medida para industrias</p>
+      <h2 class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        Qué fabricamos en nuestra fábrica de filtros industriales
+      </h2>
+      <p class="mt-4 max-w-2xl text-zinc-400">
+        Mallas y cartuchos filtrantes a medida, filtros especiales para maquinaria fuera de estándar y desarrollos
+        completos sobre muestra. Cada pieza se produce para el equipo que la necesita.
+      </p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {queFabricamos.map((elemento) => (
+          <article class="group flex flex-col rounded-2xl border border-zinc-700 bg-zinc-800/70 p-7 transition hover:-translate-y-1 hover:border-orange-500">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition group-hover:bg-orange-500 group-hover:text-slate-900">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={elemento.icono}></svg>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white">{elemento.titulo}</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-zinc-400">{elemento.descripcion}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-10">
+        <a href={urlWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold text-orange-400 transition hover:text-yellow-400">
+          Consultar un desarrollo a medida
+          <svg class="h-4 w-4 transition group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Proceso paso a paso ============ -->
+  <section id="proceso" class="border-b border-zinc-800 bg-slate-950 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Proceso de fabricación</p>
+      <h2 class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        Del plano a la pieza terminada, en cuatro pasos
+      </h2>
+
+      <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {procesoFabricacion.map((paso, indice) => (
+          <li class="relative rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+            <span class="font-display text-4xl font-extrabold text-orange-500/30" aria-hidden="true">{String(indice + 1).padStart(2, '0')}</span>
+            <h3 class="mt-3 font-display text-lg font-bold text-white">{paso.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">{paso.descripcion}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Otros servicios relacionados ============ -->
+  <section id="otros-servicios" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Otros servicios</p>
+      <p class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        Filtros en stock, service, venta y alquiler
+      </p>
+      <p class="mt-4 max-w-2xl text-zinc-400">
+        Todo lo que necesita tu operación logística, con el mismo equipo técnico detrás.
+      </p>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {otrosServicios.map((servicio) => (
+          <TarjetaServicio
+            href={servicio.href}
+            titulo={servicio.titulo}
+            descripcion={servicio.descripcion}
+            icono={servicio.icono}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Banner de CTA ============ -->
+  <section id="consulta-especial" class="border-b border-zinc-800 bg-slate-950 py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="relative overflow-hidden rounded-3xl border-l-4 border-orange-500 bg-zinc-800/80 p-8 shadow-2xl shadow-black/40 sm:p-12">
+        <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-yellow-500/10 blur-3xl" aria-hidden="true"></div>
+
+        <div class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div class="max-w-2xl">
+            <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-orange-500/40 bg-orange-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-orange-400">
+              Desarrollo a medida
+            </p>
+            <h2 class="font-display text-2xl font-extrabold leading-snug text-white sm:text-3xl">
+              ¿Tu filtro no se consigue en ningún lado? Lo fabricamos
+            </h2>
+            <p class="mt-4 leading-relaxed text-zinc-400">
+              Traé la muestra, mandá el plano o pasá las medidas: evaluamos el desarrollo y te enviamos el presupuesto sin
+              compromiso.
+            </p>
+          </div>
+
+          <div class="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
+            <a href={urlWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-7 py-4 text-base font-bold text-slate-900 shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 hover:text-white">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Consultar por WhatsApp
+            </a>
+            <a href="tel:+5491132077351" class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-600 px-7 py-4 text-base font-semibold text-zinc-100 transition hover:border-yellow-500 hover:text-yellow-400">
+              Llamar: 11 3207-7351
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Preguntas Frecuentes (FAQ / AEO) ============ -->
+  <section id="preguntas-frecuentes" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Preguntas frecuentes</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">Respuestas directas sobre filtros a medida</h2>
+      <p class="mt-4 text-zinc-400">Las dudas más habituales antes de encargar un desarrollo de filtro especial.</p>
+
+      <!-- Acordeón con <details>/<summary> nativos: accesible y sin JavaScript -->
+      <div class="mt-10 space-y-4">
+        {preguntasFrecuentes.map((item) => (
+          <PreguntaFrecuente pregunta={item.pregunta} respuesta={item.respuesta} />
+        ))}
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <p class="font-semibold text-zinc-100">¿No encontraste tu consulta? Escribinos y te respondemos con una evaluación técnica.</p>
+        <a href="/contacto/" class="mt-4 inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-orange-600 hover:text-white sm:mt-0">
+          Ir al formulario de contacto
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,466 @@
+---
+// ============================================================
+// PROMAQ MÁQUINAS - Alquiler de maquinaria y autoelevadores
+// Ruta: /alquiler-de-maquinaria/
+// Keywords (keywords.md §6): alquiler de autoelevadores, renta de
+// autoelevadores por dia mes, alquiler de maquinaria para
+// depósitos logísticos, alquiler con mantenimiento incluido,
+// autoelevador en alquiler para pymes, autoelevadores para
+// descarga de camiones.
+// ============================================================
+import Layout from '../layouts/LayoutBase.astro';
+import TarjetaServicio from '../components/TarjetaServicio.astro';
+import PreguntaFrecuente from '../components/PreguntaFrecuente.astro';
+
+const titulo = 'Alquiler de Autoelevadores y Maquinaria | PROMAQ';
+const descripcion =
+  'Alquiler de autoelevadores y maquinaria por día, mes o año, con mantenimiento y auxilio mecánico incluido. Para depósitos e industrias en Buenos Aires →';
+const keywords =
+  'alquiler de autoelevadores, renta de autoelevadores por dia mes, alquiler de maquinaria para depósitos logísticos, alquiler con mantenimiento incluido, autoelevador en alquiler para pymes, autoelevadores para descarga de camiones';
+
+const urlPagina = 'https://www.promaqmaquinas.com.ar/alquiler-de-maquinaria/';
+const urlWhatsapp =
+  'https://wa.me/5491132077351?text=Hola%20Emmanuel%2C%20me%20interesa%20cotizar%20el%20alquiler%20de%20un%20autoelevador%20%2F%20maquinaria';
+
+// Zonas de cobertura (mismo alcance que el Schema del negocio)
+const zonasCobertura = [
+  { '@type': 'City', name: 'Ciudad Autónoma de Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Zona Norte del Gran Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Zona Oeste del Gran Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Zona Sur del Gran Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Provincia de Buenos Aires' },
+  { '@type': 'AdministrativeArea', name: 'Entre Ríos' },
+  { '@type': 'Country', name: 'Argentina' },
+];
+
+// Modalidades de alquiler (H2 de sección → H3 por tarjeta)
+const modalidadesAlquiler = [
+  {
+    titulo: 'Alquiler diario',
+    descripcion:
+      'Para tareas puntuales: recepción de mercadería, días de pico, mudanzas internas o cubrir una máquina detenida. Entrega y retiro coordinados.',
+    icono:
+      '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  },
+  {
+    titulo: 'Renta mensual',
+    descripcion:
+      'La opción más habitual para depósitos y líneas de producción: autoelevador en alquiler para pymes e industrias, con mantenimiento y auxilio incluidos.',
+    icono:
+      '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  },
+  {
+    titulo: 'Alquiler anual o largo plazo',
+    descripcion:
+      'Flota estable sin desembolso de compra: planificamos el parque de máquinas, los services y los reemplazos durante toda la vigencia.',
+    icono:
+      '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
+  },
+];
+
+// Usos habituales (chips)
+const usosAlquiler = [
+  'Depósitos logísticos',
+  'Descarga de camiones',
+  'Obras y construcción',
+  'Pymes e industrias',
+  'Picos de demanda',
+  'Cobertura de máquina detenida',
+  'Flotas estables',
+];
+
+// Proceso de contratación (H2 → H3)
+const procesoAlquiler = [
+  {
+    titulo: 'Contanos la tarea',
+    descripcion:
+      'Qué movimiento hace (descarga de camiones, estantería, apilado), la capacidad de carga, la altura de izaje y los días o meses que necesitás.',
+  },
+  {
+    titulo: 'Cotizamos la modalidad',
+    descripcion:
+      'Te enviamos la cotización del alquiler diario, mensual o anual con mantenimiento y auxilio mecánico incluidos, sin costos sorpresa.',
+  },
+  {
+    titulo: 'Entregamos la máquina en planta',
+    descripcion:
+      'Coordinamos la entrega en tu planta o depósito dentro de nuestra zona de cobertura, con la documentación y el estado de la unidad.',
+  },
+  {
+    titulo: 'Mantenimiento y auxilio durante la renta',
+    descripcion:
+      'Hacemos el mantenimiento preventivo y atendemos fallas con auxilio mecánico: la máquina no es tuya, pero el servicio es nuestro problema.',
+  },
+];
+
+// FAQ: misma fuente para el acordeón visible y el schema FAQPage
+const preguntasFrecuentes = [
+  {
+    pregunta: '¿Qué incluye el alquiler de autoelevadores?',
+    respuesta:
+      'Incluye mantenimiento preventivo y auxilio mecánico durante toda la vigencia del contrato, más la entrega y retiro de la máquina. Es alquiler con mantenimiento incluido: vos operás, nosotros mantenemos.',
+  },
+  {
+    pregunta: '¿Se puede alquilar por día, mes o un período largo?',
+    respuesta:
+      'Sí. Trabajamos con renta de autoelevadores por día, mes y período largo (anual), según la necesidad de tu operación. Te sugerimos la modalidad más conveniente según la frecuencia de uso.',
+  },
+  {
+    pregunta: '¿Para qué trabajos sirve un autoelevador en alquiler?',
+    respuesta:
+      'Descarga de camiones, movimiento de mercadería en depósitos logísticos, carga y descarga en obras, apilado en estantería y cobertura temporal de tu propia máquina en mantenimiento.',
+  },
+  {
+    pregunta: '¿Alquilan a pymes y empresas chicas?',
+    respuesta:
+      'Sí. El autoelevador en alquiler para pymes es uno de nuestros usos más habituales: cotizamos desde una unidad puntual hasta flotas para industrias y centros de distribución.',
+  },
+  {
+    pregunta: '¿Entregan y retiran la máquina en mi planta?',
+    respuesta:
+      'Sí. La entrega y el retiro se coordinan en tu planta o depósito dentro de nuestra zona de cobertura: Ciudad Autónoma de Buenos Aires, Zona Norte, Zona Oeste y Zona Sur del GBA, provincia de Buenos Aires y Entre Ríos, según la modalidad acordada en el contrato.',
+  },
+  {
+    pregunta: '¿Cómo pido la cotización del alquiler?',
+    respuesta:
+      'Por WhatsApp al +54 9 11 3207-7351 o desde el formulario de contacto, indicando la tarea, la capacidad de carga, la altura de izaje y el período. Respondemos con la propuesta sin compromiso.',
+  },
+];
+
+// Schema FAQPage generado desde la misma fuente (garantiza el espejo 1:1)
+const schemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: preguntasFrecuentes.map((item) => ({
+    '@type': 'Question',
+    name: item.pregunta,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.respuesta,
+    },
+  })),
+};
+
+// Schema adicional: Service + BreadcrumbList
+const schemaAdicional = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      '@id': `${urlPagina}#servicio`,
+      name: 'Alquiler de autoelevadores y maquinaria con mantenimiento incluido',
+      serviceType: 'Alquiler de autoelevadores y maquinaria por día, mes y largo plazo',
+      description:
+        'Renta de autoelevadores y maquinaria para depósitos logísticos, obras e industrias, en modalidad diaria, mensual o anual, con mantenimiento preventivo y auxilio mecánico incluidos.',
+      url: urlPagina,
+      provider: { '@id': 'https://www.promaqmaquinas.com.ar/#negocio' },
+      areaServed: zonasCobertura,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Inicio',
+          item: 'https://www.promaqmaquinas.com.ar/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Alquiler de maquinaria',
+          item: urlPagina,
+        },
+      ],
+    },
+  ],
+};
+
+// Otros servicios (misma data que la home)
+const otrosServicios = [
+  {
+    href: '/reparacion-autoelevadores/',
+    titulo: 'Service y reparación de autoelevadores',
+    descripcion:
+      'Mantenimiento preventivo y correctivo en planta o taller: frenos, transmisión, hidráulica y mástiles.',
+    icono:
+      '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  },
+  {
+    href: '/venta-de-filtros/',
+    titulo: 'Venta de filtros industriales',
+    descripcion:
+      'Filtros de aire, aceite, combustible e hidráulicos, nacionales e importados, para autoelevadores y maquinaria.',
+    icono: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  },
+  {
+    href: '/fabricacion-filtros-especiales/',
+    titulo: 'Fabricación de filtros especiales',
+    descripcion:
+      'Filtros a medida sobre muestra, plano o medidas específicas para maquinaria fuera de estándar.',
+    icono:
+      '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+  },
+  {
+    href: '/venta-de-autoelevadores/',
+    titulo: 'Venta de autoelevadores',
+    descripcion:
+      'Autoelevadores nuevos y usados seleccionados, reacondicionados con garantía. Diésel, nafta, GLP y eléctricos.',
+    icono:
+      '<rect x="3" y="6" width="7" height="10" rx="1"/><line x1="13" y1="3" x2="13" y2="16"/><line x1="13" y1="16" x2="19" y2="16"/><circle cx="6" cy="18.5" r="2"/><circle cx="16" cy="18.5" r="2"/>',
+  },
+];
+---
+
+<Layout title={titulo} description={descripcion} keywords={keywords} schemaFaq={schemaFaq} schemaAdicional={schemaAdicional}>
+
+  <!-- ============ Hero Section ============ -->
+  <section id="inicio" class="relative overflow-hidden border-b border-zinc-800 bg-slate-900 scroll-mt-24">
+    <!-- Fondo: rejilla industrial + resplandor naranja -->
+    <div class="fondo-rejilla degradado-hero absolute inset-0 opacity-40" aria-hidden="true"></div>
+    <div class="absolute -top-32 right-0 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-yellow-500/10 blur-3xl" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+      <div class="max-w-4xl">
+
+        <!-- Miga de pan visible (espejo del BreadcrumbList del schema) -->
+        <nav aria-label="Miga de pan" class="mb-6 text-sm">
+          <ol class="flex flex-wrap items-center gap-2 text-zinc-500">
+            <li><a href="/" class="transition hover:text-orange-400">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li class="text-zinc-300" aria-current="page">Alquiler de maquinaria</li>
+          </ol>
+        </nav>
+
+        <!-- Badge -->
+        <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-yellow-400">
+          <span class="relative flex h-2 w-2" aria-hidden="true">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-yellow-400"></span>
+          </span>
+          Mantenimiento y auxilio incluidos · Día, mes o largo plazo
+        </p>
+
+        <!-- H1 único y optimizado (keywords.md §6) -->
+        <h1 class="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+          Alquiler de <span class="text-orange-500">autoelevadores</span> y maquinaria
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+          Renta de autoelevadores por día, mes o largo plazo para
+          <strong class="font-semibold text-zinc-200">depósitos logísticos, obras e industrias</strong>,
+          con mantenimiento preventivo y auxilio mecánico incluidos. Ideal para descarga de camiones y picos de demanda.
+        </p>
+
+        <!-- CTAs de acción inmediata -->
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a href={urlWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-8 py-4 text-base font-bold text-slate-900 shadow-xl shadow-orange-500/25 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Cotizar el alquiler
+          </a>
+          <a href="#modalidades" class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-600 bg-zinc-800/60 px-8 py-4 text-base font-semibold text-zinc-100 transition hover:-translate-y-0.5 hover:border-yellow-500 hover:text-yellow-400">
+            Ver modalidades
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Bloque de confianza ============ -->
+  <section id="ventajas" class="border-b border-zinc-800 bg-slate-950 py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">¿Por qué alquilar en PROMAQ MÁQUINAS?</h2>
+      <p class="mt-2 max-w-2xl text-zinc-400">Alquiler con mantenimiento incluido: la máquina rinde, nosotros nos ocupamos.</p>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Mantenimiento incluido</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Service preventivo a cargo nuestro durante toda la vigencia del alquiler.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Auxilio mecánico incluido</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Si la máquina se detiene, vamos a tu planta para restablecer la operación.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.83z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Todo incluido en el precio</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">El valor del alquiler incluye mantenimiento preventivo, auxilio mecánico y entrega/retiro: sin costos extra por service.</p>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white">Entrega en planta</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">Llegamos a CABA, GBA, provincia de Buenos Aires y Entre Ríos.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Modalidades de alquiler ============ -->
+  <section id="modalidades" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Modalidades</p>
+      <h2 class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        Renta de autoelevadores por día, mes o período largo
+      </h2>
+      <p class="mt-4 max-w-2xl text-zinc-400">
+        Alquiler de maquinaria para depósitos logísticos e industrias, con
+        <strong class="font-semibold text-zinc-200">mantenimiento y auxilio mecánico incluidos</strong>
+        en todas las modalidades.
+      </p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {modalidadesAlquiler.map((modalidad) => (
+          <article class="group flex flex-col rounded-2xl border border-zinc-700 bg-zinc-800/70 p-7 transition hover:-translate-y-1 hover:border-orange-500">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition group-hover:bg-orange-500 group-hover:text-slate-900">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={modalidad.icono}></svg>
+            </div>
+            <h3 class="font-display text-xl font-bold text-white">{modalidad.titulo}</h3>
+            <p class="mt-3 flex-1 leading-relaxed text-zinc-400">{modalidad.descripcion}</p>
+            <a href={urlWhatsapp} target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 font-semibold text-orange-400 transition hover:text-yellow-400">
+              Cotizar esta modalidad
+              <svg class="h-4 w-4 transition group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <!-- Usos habituales -->
+      <div class="mt-12 rounded-3xl border border-zinc-700 bg-zinc-800/60 p-8">
+        <h3 class="font-display text-xl font-bold text-white">¿Para qué se usa el alquiler?</h3>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {usosAlquiler.map((uso) => (
+            <li class="rounded-full border border-zinc-700 bg-slate-900/70 px-4 py-1.5 text-sm text-zinc-300">{uso}</li>
+          ))}
+        </ul>
+        <p class="mt-5 text-sm leading-relaxed text-zinc-400">
+          Trabajamos con pymes, industrias y centros de distribución que necesitan
+          <strong class="font-semibold text-zinc-200">autoelevadores para descarga de camiones</strong> o flotas estables
+          sin desembolso de compra.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Proceso de contratación ============ -->
+  <section id="proceso" class="border-b border-zinc-800 bg-slate-950 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Cómo se contrata</p>
+      <h2 class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        De la consulta a la entrega, en cuatro pasos
+      </h2>
+
+      <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {procesoAlquiler.map((paso, indice) => (
+          <li class="relative rounded-2xl border border-zinc-700 bg-zinc-800/60 p-6 transition hover:border-orange-500/60">
+            <span class="font-display text-4xl font-extrabold text-orange-500/30" aria-hidden="true">{String(indice + 1).padStart(2, '0')}</span>
+            <h3 class="mt-3 font-display text-lg font-bold text-white">{paso.titulo}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">{paso.descripcion}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Otros servicios relacionados ============ -->
+  <section id="otros-servicios" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Otros servicios</p>
+      <p class="mt-3 max-w-3xl font-display text-3xl font-bold leading-snug text-white sm:text-4xl">
+        Service, filtros, fabricación y venta
+      </p>
+      <p class="mt-4 max-w-2xl text-zinc-400">
+        Todo lo que necesita tu operación logística, con el mismo equipo técnico detrás.
+      </p>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {otrosServicios.map((servicio) => (
+          <TarjetaServicio
+            href={servicio.href}
+            titulo={servicio.titulo}
+            descripcion={servicio.descripcion}
+            icono={servicio.icono}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Banner de CTA ============ -->
+  <section id="cotizacion-alquiler" class="border-b border-zinc-800 bg-slate-950 py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="relative overflow-hidden rounded-3xl border-l-4 border-orange-500 bg-zinc-800/80 p-8 shadow-2xl shadow-black/40 sm:p-12">
+        <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-yellow-500/10 blur-3xl" aria-hidden="true"></div>
+
+        <div class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div class="max-w-2xl">
+            <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-orange-500/40 bg-orange-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-orange-400">
+              Alquiler para logística e industria
+            </p>
+            <h2 class="font-display text-2xl font-extrabold leading-snug text-white sm:text-3xl">
+              ¿Necesitás mover mercadería sin comprar la máquina?
+            </h2>
+            <p class="mt-4 leading-relaxed text-zinc-400">
+              Pasanos la tarea, la capacidad de carga y el período: te enviamos la cotización del alquiler con
+              mantenimiento y auxilio incluidos.
+            </p>
+          </div>
+
+          <div class="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
+            <a href={urlWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-7 py-4 text-base font-bold text-slate-900 shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 hover:text-white">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pedir cotización
+            </a>
+            <a href="tel:+5491132077351" class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-600 px-7 py-4 text-base font-semibold text-zinc-100 transition hover:border-yellow-500 hover:text-yellow-400">
+              Llamar: 11 3207-7351
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Preguntas Frecuentes (FAQ / AEO) ============ -->
+  <section id="preguntas-frecuentes" class="border-b border-zinc-800 bg-slate-900 py-20 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-400">Preguntas frecuentes</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">Respuestas directas antes de alquilar</h2>
+      <p class="mt-4 text-zinc-400">Las dudas más habituales de logística, industrias y pymes que alquilan con PROMAQ MÁQUINAS.</p>
+
+      <!-- Acordeón con <details>/<summary> nativos: accesible y sin JavaScript -->
+      <div class="mt-10 space-y-4">
+        {preguntasFrecuentes.map((item) => (
+          <PreguntaFrecuente pregunta={item.pregunta} respuesta={item.respuesta} />
+        ))}
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <p class="font-semibold text-zinc-100">¿No encontraste tu consulta? Escribinos y te respondemos con la propuesta.</p>
+        <a href="/contacto/" class="mt-4 inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-orange-600 hover:text-white sm:mt-0">
+          Ir al formulario de contacto
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

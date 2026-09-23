@@ -15,9 +15,10 @@ interface Props {
   description: string;
   keywords?: string;
   schemaFaq?: object;
+  schemaAdicional?: object;
 }
 
-const { title, description, keywords, schemaFaq } = Astro.props;
+const { title, description, keywords, schemaFaq, schemaAdicional } = Astro.props;
 
 const urlCanonical = new URL(Astro.url.pathname, Astro.site).href;
 const urlImagen = 'https://www.promaqmaquinas.com.ar/assets/images/logo.png';
@@ -181,6 +182,11 @@ const schemaNegocio = {
   <!-- ============ Schema JSON-LD: FAQPage (proporcionada por cada página) ============ -->
   {schemaFaq && (
     <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaFaq)}></script>
+  )}
+
+  <!-- ============ Schema JSON-LD: adicional de página (p. ej. BreadcrumbList / Service) ============ -->
+  {schemaAdicional && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaAdicional)}></script>
   )}
 </head>
 
