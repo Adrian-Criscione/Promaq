@@ -261,7 +261,15 @@ const schemaAdicional = {
             teléfono.
           </p>
 
-          <form action={`mailto:${emailMostrar}`} method="post" enctype="text/plain" class="mt-8 rounded-3xl border border-zinc-700 bg-zinc-800/60 p-6 sm:p-8">
+          <form id="formulario-consulta" action={`https://formsubmit.co/${emailMostrar}`} method="post" class="mt-8 rounded-3xl border border-zinc-700 bg-zinc-800/60 p-6 sm:p-8">
+            <!-- Backend de envío (FormSubmit): recibe el POST y reenvía la consulta a {emailMostrar} -->
+            <input type="hidden" name="_subject" value="Consulta desde la web - PROMAQ MÁQUINAS">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value={`${urlPagina}?enviado=1`}>
+            <!-- Trampa anti-bots: si la completa un robot, el envío se descarta -->
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
             <div class="grid gap-6 sm:grid-cols-2">
 
               <div>
@@ -301,15 +309,57 @@ const schemaAdicional = {
             </div>
 
             <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <button type="submit" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-8 py-4 text-base font-bold text-slate-900 shadow-lg shadow-orange-500/25 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white">
+              <button type="submit" id="boton-enviar" class="inline-flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-8 py-4 text-base font-bold text-slate-900 shadow-lg shadow-orange-500/25 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-60">
                 Enviar consulta
               </button>
               <p class="text-xs leading-relaxed text-zinc-500">
-                * Campos obligatorios. Al enviar se abrirá tu aplicación de correo con la consulta hacia {emailMostrar}.
+                * Campos obligatorios. La consulta llega a {emailMostrar} y te respondemos a la brevedad.
                 Para respuesta inmediata, preferí el WhatsApp.
               </p>
             </div>
+            <p id="estado-formulario" role="status" aria-live="polite" class="mt-6 min-h-6 text-sm font-semibold"></p>
           </form>
+
+          <script>
+            // Envío sin recargar la página (mejora progresiva). Sin JavaScript,
+            // el formulario hace un POST nativo al backend y vuelve con _next.
+            const formularioConsulta = document.getElementById('formulario-consulta');
+            const botonEnviar = document.getElementById('boton-enviar');
+            const estadoFormulario = document.getElementById('estado-formulario');
+
+            if (formularioConsulta && botonEnviar && estadoFormulario) {
+              formularioConsulta.addEventListener('submit', async (evento) => {
+                evento.preventDefault();
+                botonEnviar.disabled = true;
+                estadoFormulario.className = 'mt-6 min-h-6 text-sm font-semibold text-zinc-400';
+                estadoFormulario.textContent = 'Enviando consulta…';
+
+                try {
+                  const datosFormulario = new FormData(formularioConsulta);
+                  const emailConsulta = datosFormulario.get('email');
+                  if (emailConsulta) datosFormulario.append('_ReplyTo', String(emailConsulta));
+
+                  // Mismo backend, pero en su endpoint JSON para el envío por AJAX
+                  const urlBackend = formularioConsulta.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+                  const respuesta = await fetch(urlBackend, {
+                    method: 'POST',
+                    body: datosFormulario,
+                    headers: { Accept: 'application/json' },
+                  });
+                  if (!respuesta.ok) throw new Error('Respuesta no válida del backend');
+
+                  formularioConsulta.reset();
+                  estadoFormulario.className = 'mt-6 min-h-6 text-sm font-semibold text-green-400';
+                  estadoFormulario.textContent = '¡Consulta enviada! Te respondemos a la brevedad por WhatsApp o email.';
+                } catch {
+                  estadoFormulario.className = 'mt-6 min-h-6 text-sm font-semibold text-red-400';
+                  estadoFormulario.textContent = 'No pudimos enviar la consulta. Probá de nuevo o escribinos directo por WhatsApp.';
+                } finally {
+                  botonEnviar.disabled = false;
+                }
+              });
+            }
+          </script>
         </div>
 
         <!-- Aside: cobertura y datos -->
