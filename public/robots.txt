@@ -1,0 +1,5 @@
+# PROMAQ MÁQUINAS - robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://www.promaqmaquinas.com.ar/sitemap-index.xml

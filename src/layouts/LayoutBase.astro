@@ -16,9 +16,10 @@ interface Props {
   keywords?: string;
   schemaFaq?: object;
   schemaAdicional?: object;
+  noindex?: boolean;
 }
 
-const { title, description, keywords, schemaFaq, schemaAdicional } = Astro.props;
+const { title, description, keywords, schemaFaq, schemaAdicional, noindex = false } = Astro.props;
 
 const urlCanonical = new URL(Astro.url.pathname, Astro.site).href;
 const urlImagen = 'https://www.promaqmaquinas.com.ar/assets/images/logo.png';
@@ -35,7 +36,7 @@ const schemaNegocio = {
   url: 'https://www.promaqmaquinas.com.ar/',
   image: urlImagen,
   telephone: '+5491132077351',
-  email: 'pro.maq@yahoo.com.ar',
+  email: 'pro_maq@yahoo.com.ar',
   priceRange: '$$',
   currenciesAccepted: 'ARS',
   paymentAccepted: 'Efectivo, Transferencia bancaria',
@@ -149,9 +150,13 @@ const schemaNegocio = {
   <title>{title}</title>
   <meta name="description" content={description}>
   {keywords && <meta name="keywords" content={keywords}>}
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  {noindex ? (
+    <meta name="robots" content="noindex, nofollow">
+  ) : (
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  )}
   <meta name="author" content="PROMAQ MÁQUINAS - Emmanuel Moriones">
-  <link rel="canonical" href={urlCanonical}>
+  {!noindex && <link rel="canonical" href={urlCanonical}>}
 
   <!-- ============ Open Graph ============ -->
   <meta property="og:type" content="website">
@@ -159,7 +164,7 @@ const schemaNegocio = {
   <meta property="og:site_name" content="PROMAQ MÁQUINAS">
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
-  <meta property="og:url" content={urlCanonical}>
+  {!noindex && <meta property="og:url" content={urlCanonical}>}
   <meta property="og:image" content={urlImagen}>
 
   <!-- ============ Twitter Cards ============ -->
