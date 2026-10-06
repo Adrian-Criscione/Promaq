@@ -200,5 +200,31 @@ for (const [que, valor] of datosEsperados) {
 if (!home.includes('A COMPLETAR')) ok('sin marcadores A COMPLETAR');
 else err('quedan marcadores "A COMPLETAR" en el schema');
 
+// Vistas previas en redes: Open Graph + Twitter Card con imagen 1200x630
+console.log('\n== Vistas previas en redes (OG / Twitter) ==');
+const etiquetasSociales = [
+  ['og:image → social-card.png', 'property="og:image" content="https://www.promaqmaquinas.com.ar/assets/images/social-card.png"'],
+  ['og:image:type image/png', '<meta property="og:image:type" content="image/png">'],
+  ['og:image:width 1200', '<meta property="og:image:width" content="1200">'],
+  ['og:image:height 630', '<meta property="og:image:height" content="630">'],
+  ['og:image:alt', 'property="og:image:alt"'],
+  ['og:site_name', 'property="og:site_name"'],
+  ['og:locale es_AR', '<meta property="og:locale" content="es_AR">'],
+  ['twitter:card summary_large_image', '<meta name="twitter:card" content="summary_large_image">'],
+  ['twitter:image:alt', 'name="twitter:image:alt"'],
+];
+for (const [que, aguja] of etiquetasSociales) {
+  if (home.includes(aguja)) ok(que); else err(`falta ${que}`);
+}
+try {
+  const png = readFileSync(`${raiz}/dist/assets/images/social-card.png`);
+  const ancho = png.readUInt32BE(16);
+  const alto = png.readUInt32BE(20);
+  if (ancho === 1200 && alto === 630) ok(`social-card.png ${ancho}x${alto}`);
+  else err(`social-card.png mide ${ancho}x${alto} (esperado 1200x630)`);
+} catch {
+  err('dist/assets/images/social-card.png ausente');
+}
+
 console.log(`\nRESULTADO: ${fallos === 0 ? 'OK (0 fallos)' : `${fallos} FALLO(S)`}`);
 process.exit(fallos === 0 ? 0 : 1);

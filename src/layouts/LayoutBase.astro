@@ -22,7 +22,9 @@ interface Props {
 const { title, description, keywords, schemaFaq, schemaAdicional, noindex = false } = Astro.props;
 
 const urlCanonical = new URL(Astro.url.pathname, Astro.site).href;
-const urlImagen = 'https://www.promaqmaquinas.com.ar/assets/images/logo.png';
+const urlImagen = 'https://www.promaqmaquinas.com.ar/assets/images/social-card.png';
+const altImagenSocial =
+  'PROMAQ MÁQUINAS - Service integral de autoelevadores y maquinaria pesada en Buenos Aires';
 
 // Schema compartido: AutoRepair / LocalBusiness (datos del negocio)
 const schemaNegocio = {
@@ -157,12 +159,17 @@ const schemaNegocio = {
   <meta property="og:description" content={description}>
   {!noindex && <meta property="og:url" content={urlCanonical}>}
   <meta property="og:image" content={urlImagen}>
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content={altImagenSocial}>
 
   <!-- ============ Twitter Cards ============ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={urlImagen}>
+  <meta name="twitter:image:alt" content={altImagenSocial}>
 
   <!-- ============ Favicon ============ -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f172a'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='40' font-weight='bold' fill='%23f97316' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
